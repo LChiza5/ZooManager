@@ -13,15 +13,26 @@ import java.time.LocalDate;
 public class Cuidadores extends Empleado{
     private String especialidad;
     private String[] actividades = new String[100];
-    private int cantidadActividades = 0;;
+    private int cantidadActividades = 0;
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
 
     public void registrarActividad(String actividad) {
         if (cantidadActividades < actividades.length) {
-            actividades[cantidadActividades] = actividad;
-            cantidadActividades++;
+            actividades[cantidadActividades++] = actividad;
         } else {
             System.out.println("No se pueden registrar más actividades.");
         }
+    }
+
+    public void alimentarAnimales() {
+        registrarActividad("Alimentó a los animales");
+    }
+
+    public void verificarSaludAnimales() {
+        registrarActividad("Verificó el estado de salud de los animales");
     }
 
     public String[] getActividades() {
@@ -32,15 +43,9 @@ public class Cuidadores extends Empleado{
         return copia;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public Cuidadores(String especialidad, int id, String name, LocalDate fechaNacimiento, String Telefono, double salario) {
-        super(id, name, fechaNacimiento, Telefono, salario);
+    public Cuidadores(String especialidad, int id, String nombre, LocalDate fechaNacimiento, String telefono, double salario) {
+        super(id, nombre, fechaNacimiento, telefono, salario);
         this.especialidad = especialidad;
-        this.actividades = new String[100];
-        this.cantidadActividades = 0;
     }
 
 }
