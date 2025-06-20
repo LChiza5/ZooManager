@@ -11,20 +11,14 @@ import java.time.LocalDate;
  * @author Luisk
  */
 public class Animal {
-    private String idAnimal;
+    private String Id;
     private String nombre;
     private String especie;
     private LocalDate fechaNacimiento;
-    private String zonaActual;
-    
-     public static final String ZonaInicial = "Conservación y Rescate";
-     public static final String[] ZONAS = {
-        "Granja", "Contacto", "Alimentación", ZonaInicial,
-        "Túnel Nocturno", "Biodiversidad Local" 
-    };
+    private Zona zonaActual;
 
-    public String getIdAnimal() {
-        return idAnimal;
+    public String getId() {
+        return Id;
     }
 
     public String getNombre() {
@@ -39,30 +33,35 @@ public class Animal {
         return fechaNacimiento;
     }
 
-    public String getZonaActual() {
+    public Zona getZonaActual() {
         return zonaActual;
     }
 
-    public Animal(String idAnimal, String nombre, String especie, LocalDate fechaNacimiento, String zonaActual) {
-        if (idAnimal != null && idAnimal.matches("^[A-Z]-\\d{4}$")) {
-            this.idAnimal = idAnimal;
+    public void setZonaActual(Zona zonaActual) {
+        this.zonaActual = zonaActual;
+    }
+
+    public Animal(String idAnimal, String nombre, String especie, LocalDate fechaNacimiento) {
+       if (Id.matches("^[\\w]-[0-9]{4}$")) {
+            this.Id = Id;
         this.nombre = nombre;
         this.especie = especie;
-        this.fechaNacimiento = fechaNacimiento;
-        this.zonaActual = zonaActual;
-        }
+        if (!fechaNacimiento.isAfter(LocalDate.now()))
+            this.fechaNacimiento = fechaNacimiento;
+        this.zonaActual = Zona.Conservacion_Rescate;
+       }
     }
     
-    public void moverZona(String nuevaZona) {
-    boolean zonaValida = false;
-    for (String z : ZONAS) {
-        if (z.equalsIgnoreCase(nuevaZona) && !z.equalsIgnoreCase(this.zonaActual)) {
-            zonaValida = true;
-            break;
+    public void moverZona(Zona nuevaZona) {
+        if (nuevaZona == null) {
+            throw new IllegalArgumentException("La nueva zona no puede ser nula");
         }
-    }
-    if (zonaValida) {
         this.zonaActual = nuevaZona;
-        }
     }
+
+    @Override
+    public String toString() {
+        return "Animal{" + "Id=" + Id + ", nombre=" + nombre + ", especie=" + especie + ", fechaNacimiento=" + fechaNacimiento + ", zonaActual=" + zonaActual + '}';
+    }
+    
 }
