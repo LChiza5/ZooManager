@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class Cuidadores extends Empleado{
     private String especialidad;
-    private String[] actividades = new String[100];
+    private String[] actividades = new String[10];
     private int cantidadActividades = 0;
 
     public Cuidadores(String cedula, String nombre, LocalDate fechaNacimiento, String telefono, double salario, String especialidad) {
