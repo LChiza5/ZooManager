@@ -4,55 +4,21 @@
  */
 package Visitantes;
 
+import Personas.Persona;
 import java.time.LocalDate;
 
 /**
  *
  * @author Luisk
  */
-public class Visitante {
-    private String id;
-    private String nombre;
-    private LocalDate fechaNacimiento;
-    private String telefono;
-
-    public String getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        if (telefono != null && !telefono.matches("\\d{2}-\\d{2}-\\d{2}-\\d{2}")) {
-           throw new IllegalArgumentException("El formato del teléfono es inválido. Ej: 83-33-55-87"); 
-        }
-        this.telefono = telefono;
-    }
-
-    public Visitante(String id, String nombre, LocalDate fechaNacimiento, String telefono) {
-        this.id = id;
-        this.nombre = nombre;
-        this.fechaNacimiento = fechaNacimiento;
-        if (telefono != null && !telefono.matches("\\d{2}-\\d{2}-\\d{2}-\\d{2}")) {
-            throw new IllegalArgumentException("El formato del teléfono es inválido. Ej: 83-33-55-87");
-        }
-        this.telefono = telefono;
+public class Visitante extends Persona {
+    public Visitante(String cedula, String nombreCompleto, LocalDate fechaNacimiento, String telefono) {
+        super(cedula, nombreCompleto, fechaNacimiento, telefono);
     }
 
     @Override
     public String toString() {
-        return "Visitante{" + "id=" + id + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", telefono=" + telefono + '}';
+        return "Visitante{" +"cedula='" + cedula + '\'' + ", nombre='" + nombreCompleto + '\'' + ", nacimiento=" + fechaNacimiento +", telefono='" + (telefono != null ? telefono : "Sin registrar") + '\'' + '}';
     }
-    
     
 }

@@ -13,9 +13,20 @@ import java.time.LocalDate;
 public class Guias extends Empleado{
    private String[] idiomas = new String[10];
     private int totalIdiomas = 0;
+
     private String[] recorridos = new String[100];
     private int totalRecorridos = 0;
-    
+
+    public Guias(String cedula, String nombre, LocalDate fechaNacimiento, String telefono, double salario, String[] idiomasIniciales) {
+        super(cedula, nombre, fechaNacimiento, telefono, salario);
+
+        if (idiomasIniciales != null) {
+            for (int i = 0; i < idiomasIniciales.length && i < 10; i++) {
+                idiomas[totalIdiomas++] = idiomasIniciales[i];
+            }
+        }
+    }
+
     public void agregarIdioma(String idioma) {
         for (int i = 0; i < totalIdiomas; i++)
             if (idiomas[i].equalsIgnoreCase(idioma)) return;
@@ -23,12 +34,12 @@ public class Guias extends Empleado{
     }
 
     public void realizarRecorrido(String lugar, String animalesObservados) {
-        String descripcion = "Recorrido en " + lugar + " - Información brindada sobre: " + animalesObservados;
+        String descripcion = "Recorrido en " + lugar + " - Información sobre: " + animalesObservados;
         registrarRecorrido(descripcion);
     }
 
-    private void registrarRecorrido(String recorrido) {
-        if (totalRecorridos < 100) recorridos[totalRecorridos++] = recorrido;
+    private void registrarRecorrido(String r) {
+        if (totalRecorridos < 100) recorridos[totalRecorridos++] = r;
     }
 
     public String[] getIdiomas() {
@@ -41,15 +52,5 @@ public class Guias extends Empleado{
         String[] copia = new String[totalRecorridos];
         for (int i = 0; i < totalRecorridos; i++) copia[i] = recorridos[i];
         return copia;
-    }
-    
-    public Guias(int id, String name, LocalDate fechaNacimiento, String telefono, double salario, String[] idiomasIniciales) {
-        super(id, name, fechaNacimiento, telefono, salario);
-        
-        if (idiomasIniciales != null) {
-            for (int i = 0; i < idiomasIniciales.length && i < 10; i++) {
-                idiomas[totalIdiomas++] = idiomasIniciales[i];
-            }
-        }
     }
 }

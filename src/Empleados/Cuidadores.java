@@ -15,15 +15,14 @@ public class Cuidadores extends Empleado{
     private String[] actividades = new String[100];
     private int cantidadActividades = 0;
 
-    public String getEspecialidad() {
-        return especialidad;
+    public Cuidadores(String cedula, String nombre, LocalDate fechaNacimiento, String telefono, double salario, String especialidad) {
+        super(cedula, nombre, fechaNacimiento, telefono, salario);
+        this.especialidad = especialidad;
     }
 
     public void registrarActividad(String actividad) {
         if (cantidadActividades < actividades.length) {
             actividades[cantidadActividades++] = actividad;
-        } else {
-            System.out.println("No se pueden registrar más actividades.");
         }
     }
 
@@ -37,15 +36,12 @@ public class Cuidadores extends Empleado{
 
     public String[] getActividades() {
         String[] copia = new String[cantidadActividades];
-        for (int i = 0; i < cantidadActividades; i++) {
-            copia[i] = actividades[i];
-        }
+        for (int i = 0; i < cantidadActividades; i++) copia[i] = actividades[i];
         return copia;
     }
 
-    public Cuidadores(String especialidad, int id, String nombre, LocalDate fechaNacimiento, String telefono, double salario) {
-        super(id, nombre, fechaNacimiento, telefono, salario);
-        this.especialidad = especialidad;
+    public String getEspecialidad() {
+        return especialidad;
     }
 
 }
