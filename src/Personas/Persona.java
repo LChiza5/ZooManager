@@ -5,6 +5,7 @@
 package Personas;
 
 import java.time.LocalDate;
+import Utiles.FechaUtil;
 
 /**
  *
@@ -14,28 +15,47 @@ public class Persona {
     protected String cedula;
     protected String nombreCompleto;
     protected LocalDate fechaNacimiento;
-    protected String telefono; 
+    protected String telefono;
 
     public Persona(String cedula, String nombreCompleto, LocalDate fechaNacimiento, String telefono) {
-        this.cedula = cedula;
+        FechaUtil.validarFechaNoFutura(fechaNacimiento);
+
+        this.cedula = cedula;   
         this.nombreCompleto = nombreCompleto;
         this.fechaNacimiento = fechaNacimiento;
 
         if (telefono != null && !telefono.matches("\\d{2}-\\d{2}-\\d{2}-\\d{2}")) {
             throw new IllegalArgumentException("El formato del teléfono es inválido. Ej: 83-33-55-87");
         }
+
         this.telefono = telefono;
     }
 
-    public String getCedula() { return cedula; }
-    public String getNombreCompleto() { return nombreCompleto; }
-    public LocalDate getFechaNacimiento() { return fechaNacimiento; }
-    public String getTelefono() { return telefono; }
+    public String getCedula() {
+        return cedula;
+    }
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+    
+    public int getEdad() {
+        return FechaUtil.calcularEdad(fechaNacimiento);
+    }
 
     public void setTelefono(String telefono) {
         if (telefono != null && !telefono.matches("\\d{2}-\\d{2}-\\d{2}-\\d{2}")) {
             throw new IllegalArgumentException("Formato de teléfono inválido.");
         }
         this.telefono = telefono;
-    }
+        }
 }
+

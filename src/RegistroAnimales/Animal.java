@@ -5,20 +5,31 @@
 package RegistroAnimales;
 
 import java.time.LocalDate;
+import Utiles.FechaUtil;
 
 /**
  *
  * @author Luisk
  */
 public class Animal {
-    private String Id;
+    private String id;
     private String nombre;
     private String especie;
     private LocalDate fechaNacimiento;
-    private Zona zonaActual;
+    private String zona;
+
+    public Animal(String id, String nombre, String especie, LocalDate fechaNacimiento, String zona) {
+        FechaUtil.validarFechaNoFutura(fechaNacimiento);
+
+        this.id = id;
+        this.nombre = nombre;
+        this.especie = especie;
+        this.fechaNacimiento = fechaNacimiento;
+        this.zona = zona;
+    }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public String getNombre() {
@@ -33,35 +44,21 @@ public class Animal {
         return fechaNacimiento;
     }
 
-    public Zona getZonaActual() {
-        return zonaActual;
+    public String getZona() {
+        return zona;
     }
 
-    public void setZonaActual(Zona zonaActual) {
-        this.zonaActual = zonaActual;
+    public void setZona(String nuevaZona) {
+        this.zona = nuevaZona;
     }
 
-    public Animal(String idAnimal, String nombre, String especie, LocalDate fechaNacimiento) {
-       if (Id.matches("^[\\w]-[0-9]{4}$")) {
-            this.Id = Id;
-        this.nombre = nombre;
-        this.especie = especie;
-        if (!fechaNacimiento.isAfter(LocalDate.now()))
-            this.fechaNacimiento = fechaNacimiento;
-        this.zonaActual = Zona.Conservacion_Rescate;
-       }
-    }
-    
-    public void moverZona(Zona nuevaZona) {
-        if (nuevaZona == null) {
-            throw new IllegalArgumentException("La nueva zona no puede ser nula");
-        }
-        this.zonaActual = nuevaZona;
+    public int getEdad() {
+        return FechaUtil.calcularEdad(fechaNacimiento);
     }
 
     @Override
     public String toString() {
-        return "Animal{" + "Id=" + Id + ", nombre=" + nombre + ", especie=" + especie + ", fechaNacimiento=" + fechaNacimiento + ", zonaActual=" + zonaActual + '}';
+        return "Animal{" + "id='" + id + '\'' +", nombre='" + nombre + '\'' +", especie='" + especie + '\'' +", fechaNacimiento=" + fechaNacimiento +", zona='" + zona + '\'' +", edad=" + getEdad() + " años" +'}';
     }
     
 }
